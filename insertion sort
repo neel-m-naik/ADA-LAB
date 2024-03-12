@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+
+  int array[30], count=0;
+  int place(int pos){
+    for(int i=1;i<pos;i++){
+      if((array[i]==array[pos]) || ((abs (array[i]-array[pos])==abs(i-pos)))){
+        return 0;
+      }
+    }
+    return 1;
+  }
+
+  void print_sol(int n){
+    count++;
+    printf("\nSolution #=%d\n", count);
+    for(int i=1;i<=n;i++){
+      for(int j=1;j<=n;j++){
+        if(array[i]==j){
+          printf("Q\t");
+        }
+        else{
+          printf("*\t");
+        }
+      }
+      printf("\n");
+    }
+
+  }
+
+  void queen(int n){
+    int k=1;
+    array[k]=0;
+    while(k!=0){
+      array[k]=array[k]+1;
+      while((array[k]<=n) &&!place(k)){
+        array[k]++;
+      }
+      if(array[k]<=n){
+        if(k==n){
+          print_sol(n);
+        }
+        else{
+          k++;
+          array[k]=0;
+        }
+      }
+      else{
+        k--;
+      }
+    }
+
+  }
+
+  int main(){
+    int i,n;
+    printf("\nNumber of queens=\n");
+    scanf("%d\n", &n);
+    queen(n);
+    printf("\nNumber of soltuions =%d\n", count);
+    return 0;
+  }
